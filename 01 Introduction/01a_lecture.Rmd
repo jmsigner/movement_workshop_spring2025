@@ -176,7 +176,7 @@ for (i in 1:10) {
 
 # Recommended setup
 
-- We would recommend to download the whole repository from GitHub (https://github.com/jmsigner/movement_workshop_winter_2025)^[If you are familiar with git, feel free to clone the repository]. 
+- We would recommend to download the whole repository from GitHub (https://github.com/jmsigner/movement_workshop_spring2025)^[If you are familiar with git, feel free to clone the repository]. 
 
 - Then use the RStudio project (together with RStudio).
 - Following these guides, you should have all paths correct. 
