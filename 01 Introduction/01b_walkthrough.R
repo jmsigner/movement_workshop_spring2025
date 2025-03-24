@@ -79,6 +79,7 @@ dat$name
 tr <- make_track(dat, x_, y_, ts, name = name, crs = 5070)
 tr
 
+class(dat1)
 class(tr)
 
 
@@ -173,12 +174,12 @@ table(leroy2$burst_)
 
 leroy2 |> step_lengths()
 
-# If want to add step lengths to the data set we can use mutate()
-
-leroy3$sl <- step_lengths(leroy3)
 
 # It is possible to do the same with magrittr pipes
 leroy3 <- leroy2 %>% mutate(sl = step_lengths(.))
+
+# If want to add step lengths to the data set we can use mutate()
+leroy3$sl <- step_lengths(leroy3)
 
 # note the use of the `.` here, indicates, that we want to refer to the dataset
 # that is currently under evaluation.
@@ -221,6 +222,7 @@ leroy2 |> steps()
 # points. To overcome this, we can use `steps_by_burst()`.
 
 s2 <- leroy2 |> steps_by_burst() 
+s2
 
 # The resulting tibble has 11 columns by default: 
 # - `burst_`: the burst number.
