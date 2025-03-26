@@ -120,6 +120,7 @@ i <- 2
 res$area[i] <- filter(dat, day == res$day[i], name == res$name[i]) |> 
   hr_mcp() |> hr_area() |> pull(area)
 
+
 # And we could continue like this. This is very tedious and does not save us a lot
 # of time. Fortunately, it easy to automatize this process using `for`-loops.
 
@@ -264,12 +265,6 @@ dat2 <- dat |> nest(data = -c(name, day)) |>
 dat2
 
 
-# Different sampling rates for different animals
-dat2a <- dat |> nest(data = -name) 
-dat2a$sampling_rate <- 1:4
-
-dat2a <- mutate(dat2a, data1 = map2(data, sampling_rate, ~ 
-                                      track_resample(.x, rate = hours(.y), tolerance = minutes(5))))
 
 # And we can redo the same summary as before
 ggplot(dat2, aes(n, area.mcp, col = name)) + geom_point() + geom_smooth()
@@ -290,6 +285,16 @@ lm(area.mcp ~ n + name, data = filter(dat2, n >= 10)) |> summary()
 # So we can conclude that sample size does not matter, since the coefficient for
 # `n` is not significantly different from zero.
 
+
+# Different sampling rates for different animals
+dat2a <- dat |> nest(data = -name) 
+dat2a$sampling_rate <- 1:4
+
+dat2a <- mutate(dat2a, data1 = map2(data, sampling_rate, ~ 
+                                      track_resample(.x, rate = hours(.y), tolerance = minutes(5))))
+
+dat2a
+
 # Does estimator choice matter?   ---- 
 # Lastly, we can check how the estimated
 # daily space use differs between two different estimators.
@@ -308,6 +313,9 @@ dat2 <- dat |> nest(data = -c(name, day)) |>
 
 dat2
 
+hr_area(dat2$hr.mcp[[1]])
+hr_area(dat2$hr.kde[[1]])
+
 # Since all estimators implemented in `amt` have an area method implemented, we
 # can simplify the workflow by changing from the wide format to the long format.
 dat3 <- dat2 |> 
@@ -324,13 +332,12 @@ dat3 |> ggplot(aes(name, hrs, fill = estimator)) + geom_boxplot() +
 
 # Overlap between MCP and KDE ----
 
-
 # As a final step, lets look how much MCP and KDE estimators overlap. 
 
 dat2 <- dat2[1:10, ] |> mutate(overlap = map2(hr.mcp, hr.kde, ~ hr_overlap(.x, .y)))
 dat2
-dat2$overlap[[2]]
-dat2 |> unnest(overlap)
+dat2$overlap[[1]]
 
-‚
+dat2 |> unnest(cols = overlap)
+
 
