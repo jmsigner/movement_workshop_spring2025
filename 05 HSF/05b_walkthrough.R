@@ -442,9 +442,9 @@ temp_rss <- log_rss(hsf, x1, x2, ci = "se")
            exp_upr = exp(upr)) |> 
     ggplot(aes(x = temp_x1, y = rss, ymin = exp_lwr, ymax = exp_upr)) +
     geom_hline(yintercept = 1, linetype = "dashed") +
-    geom_ribbon(size = 0.5, linetype = "dashed", fill = "gray70", color = "black") +
+    geom_ribbon(linewidth = 0.5, linetype = "dashed", fill = "gray70", color = "black") +
     geom_line(linewidth = 1) +
-    xlab("Temperature (°C)") +
+    xlab("Temperature (\u00b0C)") +
     ylab("RSS") +
     theme_bw())
 

@@ -57,7 +57,7 @@ template: terms
 
 <br>
 
-.note[We will primarily use the terminology and notation of [Matthiopoulos et al. 2023](https://bookdown.org/jfieberg/SHABook/)). ]
+.note[We will primarily use the terminology and notation of [Matthiopoulos et al. (2023)](https://bookdown.org/jfieberg/SHABook/). ]
 
 .note[Note that Lele et al. (2013) is another good source for this information, with similar definitions.]
 
