@@ -238,7 +238,7 @@ lr1$df
 exp(lr1$df$log_rss)
 
 # This is the same as: 
-
+summary(m1)
 exp(coef(m1)["forestTRUE"]) # See Module 5 for this
 
 # `log_rss()` is designed to be able to consider several locations as `x1`,
