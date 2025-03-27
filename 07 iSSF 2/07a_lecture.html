@@ -4,7 +4,7 @@
     <title>iSSFs Part 2</title>
     <meta charset="utf-8" />
     <meta name="author" content="Brian J. Smith" />
-    <meta name="date" content="2025-03-26" />
+    <meta name="date" content="2025-03-27" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="../css/default.css" type="text/css" />
     <link rel="stylesheet" href="../css/default-fonts.css" type="text/css" />
@@ -21,7 +21,7 @@ class: center, middle, inverse
 ## Movement and Habitat Interactions
 
 Brian J. Smith  
-26 March 2025
+27 March 2025
 
 *Analysis of Animal Movement Data in R*  
 J. Signer &amp; B. Smith  
@@ -73,7 +73,7 @@ These two processes combine to give rise to the observed movement trajectory.
 
 ## Review of iSSA
 
-iSSA requires available steps to be sampled from a theoretical distribution.
+iSSA requires available steps to be sampled from a parametric distribution.
 
 - Distributions must be from the exponential family to be fit via GLM.
 
@@ -92,13 +92,9 @@ class: center, middle
 
 Habitat selection parameters can still be interpreted using (log-)RSS.
 
-- RSS is how many times more steps you expect to land in habitat `\(x_1\)` vs. habitat `\(x_2\)`, conditional on the starting location of the step and the movement parameters.
+- RSS is how much more likely a step is to land in habitat `\(x_1\)` vs. habitat `\(x_2\)`, conditional on the starting location of the step and the movement parameters.
 
   - Don't forget the conditional nature of steps.
-  
-???
-
-Note that "how many times more steps" is equivalent to "how much more likely" over the long run. I.e., we can interpret the expected value or the probability.
 
 ---
 
@@ -818,6 +814,12 @@ parameters in habitat-selection analyses". In: _Journal of Animal
 Ecology_ 90.5, pp. 1027-1043. DOI:
 [10.1111/1365-2656.13441](https://doi.org/10.1111%2F1365-2656.13441).
 
+&lt;a name=bib-green_temperature_2025&gt;&lt;/a&gt;[Green, B. R., E. P. Tanner, R.
+B. Chandler, et al.](#cite-green_temperature_2025) (2025). "Temperature
+influences resource selection and predation risk tolerance in a climate
+generalist". En. In: _Landscape Ecology_ 40.2, p. 40. DOI:
+[10.1007/s10980-025-02056-6](https://doi.org/10.1007%2Fs10980-025-02056-6).
+
 &lt;a name=bib-hodel_circularlinear_2022&gt;&lt;/a&gt;[Hodel, F. H. and J. R.
 Fieberg](#cite-hodel_circularlinear_2022) (2022). "Circular–linear
 copulae for animal movement data". En. In: _Methods in Ecology and
@@ -830,12 +832,6 @@ Associations: Spatial data, predictive models, and ecological
 insights_. Second. University of Minnesota Libraries Publishing. ISBN:
 978-1-946135-68-1. DOI:
 [10.24926/2020.081320](https://doi.org/10.24926%2F2020.081320).
-
-&lt;a name=bib-Michelot2024&gt;&lt;/a&gt;[Michelot, T., N. J. Klappstein, J. R.
-Potts, et al.](#cite-Michelot2024) (2024). "Understanding step
-selection analysis through numerical integration". In: _Methods in
-Ecology and Evolution_ 15.1, pp. 24-35. DOI:
-[10.1111/2041-210X.14248](https://doi.org/10.1111%2F2041-210X.14248).
 
 &lt;a name=bib-Picardi2021&gt;&lt;/a&gt;[Picardi, S., P. Coates, J. Kolar, et
 al.](#cite-Picardi2021) (2021). "Behavioural state-dependent habitat

@@ -3,7 +3,7 @@ title: "iSSFs Part 2"
 subtitle: "Movement and Habitat Interactions"
 author: "Brian J. Smith"
 institute: "Analysis of Animal Movement Data in R"
-date: "26 March 2025"
+date: "27 March 2025"
 output:
   xaringan::moon_reader:
     seal: false
@@ -30,7 +30,7 @@ class: center, middle, inverse
 ## Movement and Habitat Interactions
 
 Brian J. Smith  
-26 March 2025
+27 March 2025
 
 *Analysis of Animal Movement Data in R*  
 J. Signer & B. Smith  
@@ -82,7 +82,7 @@ These two processes combine to give rise to the observed movement trajectory.
 
 ## Review of iSSA
 
-iSSA requires available steps to be sampled from a theoretical distribution.
+iSSA requires available steps to be sampled from a parametric distribution.
 
 - Distributions must be from the exponential family to be fit via GLM.
 
@@ -101,13 +101,9 @@ class: center, middle
 
 Habitat selection parameters can still be interpreted using (log-)RSS.
 
-- RSS is how many times more steps you expect to land in habitat $x_1$ vs. habitat $x_2$, conditional on the starting location of the step and the movement parameters.
+- RSS is how much more likely a step is to land in habitat $x_1$ vs. habitat $x_2$, conditional on the starting location of the step and the movement parameters.
 
   - Don't forget the conditional nature of steps.
-  
-???
-
-Note that "how many times more steps" is equivalent to "how much more likely" over the long run. I.e., we can interpret the expected value or the probability.
 
 ---
 
