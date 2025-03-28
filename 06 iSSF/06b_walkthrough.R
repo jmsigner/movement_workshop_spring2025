@@ -36,6 +36,10 @@ source("fun/sim_ssf.R")
 # filed using the default settings. In order to create a binary landscape (0 and
 # 1), we take 0.5 as a threshold which should lead on average to approx. 50 %
 # forest.
+
+# Note the package NLMR is not maintained anymore, below is the code how to 
+# simulate covariates, but you just skip it and load to the covariates. 
+
 dim <- 200 # This is the dimension of the landscape (200 * 200 pixels)
 forest <- rast(NLMR::nlm_gaussianfield(dim, dim) < 0.5)
 plot(forest)
@@ -50,6 +54,12 @@ covars <- c(forest, ele)
 names(covars)
 names(covars) <- c("forest", "elevation")
 names(covars)
+write_rds(covars, "data/06_covars.rds")
+
+# Loading covariates: if not simulated
+coars <- read_rds("data/06_covars.rds")
+
+
 
 # ... Movement 
 # Next we model the movement of the animal using a exponential distribution for
