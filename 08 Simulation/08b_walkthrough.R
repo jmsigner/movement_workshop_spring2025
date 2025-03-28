@@ -23,6 +23,7 @@ r[] <- 0
 r[80:100, ] <- 1
 names(r) <- "x"
 plot(r)
+r
 
 
 # ... Redistribution kernel ---------------------------------------------------
@@ -51,7 +52,7 @@ lines(p1$x_, p1$y_)
 
 # Repeat this for 50 animals
 n <- 50
-system.time(p1 <- replicate(n, simulate_path(rdk.1a, n = 15, 
+system.time(p1 <- replicate(n, simulate_path(rdk.1a, n = 25, 
                                              start = start), 
                             simplify = FALSE))
 
@@ -66,7 +67,7 @@ tibble(
   ylim(-100, 100)
 
 # Smooth output at different points in time
-trks <- lapply(c(2, 5, 10, 15), function(i) {
+trks <- lapply(c(2, 5, 10, 15, 25), function(i) {
   tibble(
     rep = 1:n, 
     path = map(p1, ~ dplyr::slice(.x, i))
@@ -74,7 +75,7 @@ trks <- lapply(c(2, 5, 10, 15), function(i) {
     make_track(x_, y_) |> hr_kde(trast = r)
 })
 plts <- terra::rast(lapply(trks, hr_ud))
-names(plts) <- paste("n =", c("2", "5", "10", "15"))
+names(plts) <- paste("n =", c("2", "5", "10", "15", "25"))
 terra::plot(plts)
 
 # Contrast this with unconstrained movement
@@ -123,7 +124,7 @@ trks <- lapply(c(2, 5, 10, 15), function(i) {
     make_track(x_, y_) |> hr_kde(trast = r)
 })
 plts1 <- terra::rast(lapply(trks, hr_ud))
-names(plts) <- paste("n =", c("2", "5", "10", "15"))
+names(plts1) <- paste("n =", c("2", "5", "10", "15"))
 
 terra::plot(plts1)
 terra::plot(plts) # constrained movement as comparison from before‚
@@ -139,6 +140,7 @@ set.seed(123333)
 # been used as a case study in many other papers.
 cilla <- read_rds("data/cilla.rds")
 env <- rast(read_rds("data/env_covar.rds"))
+
 
 # The first step is to prepare the data to fit an iSSF model. `cilla` is already
 # and `amt` track.
@@ -234,7 +236,7 @@ water <- crop(water, water - 5000)
 plot(water)
 
 # We can use the connected components algorigthm that is implemented in the
-# raster package with the `clump()` function.
+# terra package with the `patches()` function.
 water <- env[["water_dist"]] > 100
 water <- crop(water, ext(water) - 5000)
 plot(water)
@@ -254,7 +256,7 @@ ssf_cilla <- cilla %>% steps_by_burst() %>% random_steps() %>%
   # the satart and at the end of each step.
   extract_covariates(env1, where = "both") 
 
-# We can coulbe check this again
+# We can double check this again
 ssf_cilla %>% select(starts_with("water"))
 
 # In the model we now create a new variable on the fly, that checks if the start
@@ -284,7 +286,7 @@ s3 <- simulate_path(k3, n.steps = 500)
 
 # And finally plot the result
 plot(env1[["water_crossed"]])
-lines(cilla$x_, cilla$y_)
+lines(cilla$x_, cilla$y_, col = "white")
 lines(s3$x_, s3$y_, col = "red")
 
 
@@ -325,4 +327,5 @@ k3 <- redistribution_kernel(
   map = env1, start = make_start(ssf_cilla[1, ]),
   landscape = "continuous", tolerance.outside = 0.1, as.rast = FALSE, 
   n.sample = 100, n.control = 1e3)
+
 
